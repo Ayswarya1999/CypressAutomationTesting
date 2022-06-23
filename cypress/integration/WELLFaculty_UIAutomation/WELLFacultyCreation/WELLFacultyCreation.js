@@ -24,6 +24,7 @@ And('User verifies the fields on the WELL Faculty page', function () {
 })
 And('User clicks on continue button', function () {
     cy.xpath(this.locator.WellFaculty.Continuebtn).click({ force: true })
+    cy.wait(3000)
 })
 Then('User will be redirected to the WELL Faculty Application page successfully', function () {
     cy.contains("WELL Faculty Application").should('be.visible')
@@ -41,6 +42,7 @@ When('User enters data to First name, Last name and Email fields', function () {
     cy.xpath(this.locator.WellFaculty.Firstname).clear().type(this.data.WellFaculty.Firstname)
     cy.xpath(this.locator.WellFaculty.Lastname).clear().type(this.data.WellFaculty.Lastname)
     // cy.xpath(this.locator.WellFaculty.Email).clear().type(this.data.WellFaculty.Email)
+    cy.wait(2000)
 })
 /////////////////////////////////////Address////////////////////////////////////////////////////////
 And('User verifies Address fields on the WELL Faculty Application page', function () {
@@ -62,6 +64,7 @@ And('User enters data to Country, State, Street address, City and Postal Code fi
     cy.xpath(this.locator.WellFaculty.Streetaddress).type(this.data.WellFaculty.streetName)
     cy.xpath(this.locator.WellFaculty.City).type(this.data.WellFaculty.cityName)
     cy.xpath(this.locator.WellFaculty.PostalCode).type(this.data.WellFaculty.postalCode)
+    cy.wait(2000)
 })
 /////////////////////////////////////Job Details////////////////////////////////////////////////////////
 And('User verifies Job Details fields on the WELL Faculty Application page', function () {
@@ -84,24 +87,31 @@ And('User upload cv or resume', function () {
 })
 And('User selects yes or no for Are you a current USGBC Faculty Member', function () {
     cy.get(this.locator.WellFaculty.Radiobtn).eq(1).click({ force: true })
+    cy.wait(2000)
 })
 And('User selects Credentials & Certificates', function () {
     cy.get(this.locator.WellFaculty.Radiobtn).eq(2).click({ force: true })
+    cy.wait(2000)
 })
 And('User selects yes or no for Migrated from USGBC', function () {
     cy.get(this.locator.WellFaculty.Radiobtn).eq(6).click({ force: true })
+    cy.wait(2000)
 })
 And('User selects yes or no for Are you an Advisor', function () {
     cy.get(this.locator.WellFaculty.Radiobtn).eq(9).click({ force: true })
+    cy.wait(2000)
 })
 And('User selects yes or no for Part of a Member organization', function () {
     cy.get(this.locator.WellFaculty.Radiobtn).eq(11).click({ force: true })
+    cy.wait(2000)
 })
 And('User selects yes or no for Are you LEED Faculty', function () {
     cy.get(this.locator.WellFaculty.Radiobtn).eq(13).click({ force: true })
+    cy.wait(2000)
 })
 And('User clicks on the continue button', function () {
     cy.xpath(this.locator.WellFaculty.ContinueButton).click({ force: true })
+    cy.wait(2000)
 })
 Then('User will be redirected to the Presentation and Facilitation Skills page successfully', function () {
     cy.contains("Presentation and Facilitation Skills").scrollIntoView().should('be.visible')
@@ -126,9 +136,11 @@ When('User clicks on Save and Review Application button without entering the man
 })
 And('User enters data to Describe your qualifications and experience', function () {
     cy.xpath(this.locator.WellFaculty.qualifications).scrollIntoView().type(this.data.WellFaculty.Testdata)
+    cy.wait(2000)
 })
 And('User upload file for list of your appearances', function () {
     cy.xpath(this.locator.WellFaculty.appearancesUpload).attachFile(this.data.WellFaculty.UploadResume, { force: true })
+    cy.wait(2000)
 })
 And('User upload at least 2 documents for Letters of recommendation', function () {
     cy.xpath(this.locator.WellFaculty.recommendationUpload).attachFile(this.data.WellFaculty.UploadResume, { force: true })
@@ -166,7 +178,7 @@ Then('User verifies the application draft saved page', function () {
     cy.wait(2000)
 })
 And('User clicks on Submit Application button', function () {
-    cy.xpath(this.locator.WellFaculty.SubmitApplicationbtn).click({ force: true })
+    cy.xpath(this.locator.WellFaculty.SubmitApplicationbtn).click({ multiple: true })
 })
 Then('User will be redirected to the Presentation and Facilitation Skills page successfully', function () {
 
@@ -177,25 +189,27 @@ Given('User logged in to WELL certified account', function () {
     cy.contains("Dashboard").should('be.visible')
     cy.wait(2000)
 })
-When('User clicks on the WELL Faculty from top menu under Training', function () {
+When('User clicks on the WELL Faculty from top menu under Admin', function () {
     cy.xpath(this.locator.WellFaculty.AdminWELLFaculty).click({ force: true })
     cy.wait(2000)
 })
-Then('User will be redirected to the WELL Faculty page successfully', function () {
-    cy.contains("About").should('be.visible')
-})
-And('User verifies fields on WELL Faculty page', function () {
-    cy.contains("Eligibility").should('be.visible')
-    cy.xpath(this.locator.WellFaculty.AdminRegister).should('be.visible')
-    cy.xpath(this.locator.WellFaculty.AdminSubmitForReview).should('be.visible')
-    cy.xpath(this.locator.WellFaculty.AdminReviewResults).should('be.visible')
-    cy.xpath(this.locator.WellFaculty.AdminPayInvoice).should('be.visible')
-    cy.xpath(this.locator.WellFaculty.Continuebtn).should('be.visible')
-    cy.xpath(this.locator.WellFaculty.DownloadAgreementbtn).should('be.visible')
+Then('User will be redirected to the Admin Faculty Faculty list page successfully', function () {
+    cy.contains("Admin Faculty").should('be.visible')
     cy.wait(3000)
 })
-And('User clicks on WELL Faculty continue button', function () {
-    cy.xpath(this.locator.WellFaculty.Continuebtn).click({ force: true })
+And('User verifies fields on the Admin Faculty Faculty list page', function () {
+    cy.xpath(this.locator.WellFaculty.Firstname).should('be.visible')
+    cy.xpath(this.locator.WellFaculty.Lastname).should('be.visible')
+    cy.xpath(this.locator.WellFaculty.Email).should('be.visible')
+    cy.xpath(this.locator.WellFaculty.AdminApplicationStatus).should('be.visible')
+    cy.xpath(this.locator.WellFaculty.Applybtn).should('be.visible').click({ force: true })
+})
+And('user clicks on View under actions', function () {
+    cy.xpath(this.locator.WellFaculty.Email).type(this.data.WellFaculty.Email)
+    cy.wait(2000)
+    cy.xpath(this.locator.WellFaculty.Applybtn).click({ force: true })
+    cy.wait(2000)
+    cy.get(this.locator.WellFaculty.Viewbtn).should('be.visible').click()
     cy.wait(3000)
 })
 And('User verifies Review Application popup', function () {
@@ -282,6 +296,18 @@ And('User selects the Application Approved Date', function () {
 And('User enters data to Approved By field', function () {
     cy.xpath(this.locator.WellFaculty.Approvedby).type(this.data.WellFaculty.Testdata)
 })
+And('User selects the Faculty Expiration date', function () {
+    cy.xpath(this.locator.WellFaculty.FacultyExpirationdate).click({ force: true })
+    cy.wait(2000)
+    cy.xpath(this.locator.WellFaculty.selectMonth).click({ force: true })
+    cy.wait(2000)
+    cy.xpath(this.locator.WellFaculty.DecMonth).scrollIntoView().click({ force: true })
+    cy.wait(2000)
+    cy.xpath(this.locator.WellFaculty.ApproveddateOKbtn).click({ force: true })
+    cy.wait(2000)
+    cy.xpath(this.locator.WellFaculty.ApproveddateOKbtn).click({ force: true })
+
+})
 And('User enters data to Reason Denial, Region and Source fields', function () {
     cy.xpath(this.locator.WellFaculty.ReasonDenial).scrollIntoView().type(this.data.WellFaculty.Testdata)
     cy.wait(2000)
@@ -318,6 +344,7 @@ And('User selects Next Step Date', function () {
     cy.xpath(this.locator.WellFaculty.NextStepDate).click({ force: true })
     cy.wait(2000)
     cy.xpath(this.locator.WellFaculty.ApproveddateOKbtn).click({ force: true })
+    cy.wait(2000)
 })
 And('User enters data to Admin Notes, Admin Notes 2, Admin Notes 3 fields', function () {
     cy.xpath(this.locator.WellFaculty.AdminNotes).type(this.data.WellFaculty.Testdata)
@@ -327,13 +354,24 @@ And('User enters data to Admin Notes, Admin Notes 2, Admin Notes 3 fields', func
     cy.xpath(this.locator.WellFaculty.AdminNotes3).type(this.data.WellFaculty.Testdata)
     cy.wait(3000)
 })
+And('User upload Scorecard Documents', function () {
+    cy.xpath(this.locator.WellFaculty.ScorecardUpload).attachFile(this.data.WellFaculty.Uploadfile, { force: true })
+    cy.wait(3000)
+})
 And('User clicks on Update And Review Application button', function () {
     cy.xpath(this.locator.WellFaculty.UpdateAndReviewApplicationbtn).click({ force: true })
-    cy.wait(3000)
+    cy.wait(5000)
 })
 And('User verifies Congratulations popup', function () {
     cy.contains("Your application has been approved after review")
     cy.wait(3000)
+})
+And('User clicks on Return button', function () {
+    cy.xpath(this.locator.WellFaculty.Returnbutton).click({ force: true })
+    cy.wait(3000)
+})
+And('User verifies Application Status as Approved', function () {
+    cy.get(this.locator.WellFaculty.Status).should('contain',"approved")
 })
 ////////////////////////////////////////Validate Invoice/////////////////////////////////////////////////
 And('User clicks on Pay Invoice', function () {
